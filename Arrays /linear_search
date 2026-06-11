@@ -1,0 +1,18 @@
+Best Case: O(1)
+Average Case: O(n)
+
+Worst Case (TC): O(n)
+Space Complexity: O(1)
+
+
+int linearSearch(int n, int num, vector<int> &arr)
+{
+    // Write your code here.
+    for(int i=0; i<n; i++){
+        if(arr[i] == num) return i;
+    }
+
+    return -1;
+}
+
+// if last occurence is asked, iterate form end
