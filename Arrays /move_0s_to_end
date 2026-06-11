@@ -1,0 +1,58 @@
+# Brute force
+
+TC: O(n)
+SC: O(n)
+
+vector<int> moveZeros(int n, vector<int> a) {
+    // Write your code here.
+
+    // step - 1
+    vector<int> temp;
+    for(int i=0; i<n; i++){
+        if(a[i] != 0){
+            temp.push_back(a[i]);
+        }
+    }
+
+    // step - 2
+    int nonZero = temp.size();
+    for(int i=0; i<nonZero; i++){
+        a[i] = temp[i];
+    }
+
+    // step - 3
+    for(int i=nonZero; i<n; i++){
+        a[i] = 0;
+    }
+    
+    return a;
+}
+
+// Optimal 
+
+Complexity
+TC: O(n)
+SC: O(1)
+
+This is the optimal two-pointer solution
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int j = -1;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] == 0){
+                j = i;
+                break;
+            }
+        }
+        
+        if(j == -1) return;
+
+        for(int i=j+1; i<nums.size(); i++){
+            if(nums[i] != 0){
+                swap(nums[i], nums[j]);
+                j++;
+            }
+        }
+    }
+};
