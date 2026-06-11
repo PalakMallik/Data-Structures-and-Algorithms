@@ -44,6 +44,8 @@ int main(){
 
 # Optimal 
 
+TC :  O(n)
+SC :  O(1)
 vector<int> rotateArray(vector<int>arr, int k) {
 
     reverse(arr.begin(), arr.begin()+k);
