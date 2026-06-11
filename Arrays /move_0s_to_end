@@ -4,7 +4,6 @@ TC: O(n)
 SC: O(n)
 
 vector<int> moveZeros(int n, vector<int> a) {
-    // Write your code here.
 
     // step - 1
     vector<int> temp;
