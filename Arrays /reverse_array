@@ -1,0 +1,17 @@
+simplest way is to use reverse() function in C++
+
+void reverse(vector<int>& vec){
+  int left = 0;
+  int right = vec.size()-1;
+
+  while(left < right){
+    int temp = vec[left];             // or just use -- swap(vec[left], vec[right]);
+    vec[left] = vec[right];
+    vec[right] = temp;
+
+    left++;
+    right--;
+  }
+  
+  Time Complexity: O(n)
+  Space Complexity: O(1)
