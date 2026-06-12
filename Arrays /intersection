@@ -1,0 +1,178 @@
+# Brute force   (only when both arrays are sorted)
+it's too much time - taking
+Time Complexity: O(n × m)
+Space Complexity: O(m) (for visited)
+
+
+#include <bits/stdc++.h> 
+vector<int> findArrayIntersection(vector<int> &arr1, int n, vector<int> &arr2, int m)
+{
+
+  vector<int> visited(m, 0);
+	vector<int> intersection;
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			if(arr1[i] == arr2[j] && visited[j] == 0){
+				intersection.push_back(arr1[i]);
+				visited[j] = 1;
+				break;
+			}
+
+			if(arr1[i] < arr2[j]) break;
+		}
+	}
+	return intersection;
+}
+
+
+
+# Optimal (only when both arrays are sorted)
+TC: O(n + m)
+
+SC: O(1) (excluding the output array)
+Auxiliary Space: O(1)
+Total Space (including output): O(min(n, m))
+
+#include <bits/stdc++.h> 
+vector<int> findArrayIntersection(vector<int> &arr1, int n, vector<int> &arr2, int m)
+{
+	// Write your code here.
+	int i = 0;
+	int j = 0;
+	vector<int> intersection;
+
+	while(i < n && j < m){
+		if(arr1[i] < arr2[j]){
+			i++;
+		}
+
+		else if(arr1[i] > arr2[j]){
+			j++;
+		}
+
+		else{
+			intersection.push_back(arr1[i]);
+			i++;
+			j++;
+		}
+	}
+
+	return intersection;
+}
+
+
+# if either of the arrays is unsorted
+Array Type	                                      Optimal Approach
+
+Sorted + Sorted	                                  Two pointers
+Unsorted + Unsorted	                              Hash map (unordered_map)
+Unsorted but extra space not allowed	            Sort + two pointers
+
+
+Hashmap (unordered map)  - (Unsorted + Unsorted)
+
+TC: O(n + m) average
+SC: O(n)
+
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> intersection;
+        unordered_map<int, int> freq;
+
+        for(int i=0; i<nums1.size(); i++){
+            freq[nums1[i]]++;
+        }
+
+        for(int i=0; i<nums2.size(); i++){
+            if(freq[nums2[i]] > 0){
+                intersection.push_back(nums2[i]);
+                freq[nums2[i]]--;
+            }
+        }
+
+        return intersection;
+    }
+};
+
+# Unsorted arrays of distinct elements (no duplicates), return number of elements in intersection
+TC: O(n + m) average
+SC: O(n)
+where:
+n = a.size()
+m = b.size()
+
+class Solution {
+  public:
+    int intersectSize(vector<int> &a, vector<int> &b) {
+        // code  here
+        unordered_set<int> s(a.begin(), a.end());
+        
+        int count = 0;
+        for(auto val : b){
+            if(s.find(val) != s.end()){
+            count++;
+            }
+        }
+        
+        return count;
+    }
+};
+
+// Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result
+// in any order.
+
+🧠 Summary
+Approach	                    Type	                    Time Complexity                   Space Complexity
+
+Nested loops + set	          Brute	                    O(n × m)                          O(k)
+Sort + two pointers	          Better	                  O(n log n + m log m)              O(1) (or O(log n + log m) depending on sorting)
+Hash set	                    Best	                    O(n + m)                          O(n + m)
+
+// Brute 
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_set<int> s;
+        vector<int> intersection;
+
+        for(int i=0; i<nums1.size(); i++){
+            for(int j=0; j<nums2.size(); j++){
+                if(nums1[i] == nums2[j]){
+                    s.insert(nums1[i]);
+                }
+            }
+        }
+
+        for(auto val : s){
+            intersection.push_back(val);
+        }
+
+        return intersection;
+    }
+};
+
+
+# Optimal 
+🔥 Final TC:
+O(n + m + k) ≈ O(n + m)
+
+🔥 Final TC:
+O(n + m + k) ≈ O(n + m)
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_set<int> s(nums1.begin(), nums1.end());
+        unordered_set<int> result;
+
+        for(int x : nums2){
+            if(s.count(x)){
+                result.insert(x);
+            }
+        }
+
+        return vector<int>(result.begin(), result.end());
+    }
+};
