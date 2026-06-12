@@ -1,0 +1,98 @@
+// Brute force
+
+n = size of a, m = size of b
+
+TC: O((n+m) log(n+m))
+SC: O(n+m)
+
+#include <bits/stdc++.h>
+vector < int > sortedArray(vector < int > a, vector < int > b) {
+    // Write your code here
+    set<int> s;
+
+    for(int i=0; i<a.size(); i++){
+        s.insert(a[i]);
+    }
+
+    for(int i=0; i<b.size(); i++){
+        s.insert(b[i]);
+    }
+
+    vector<int> unionArray;
+    for(auto val : s){
+        unionArray.push_back(val);
+    }
+
+    return unionArray;
+}
+
+
+// Optimal approach
+
+Let:
+n = a.size()
+m = b.size()
+
+Time Complexity: O(n + m) (average case)
+
+SC = O(1) auxiliary space
+Extra Space = O(1)
+(or O(n + m) including the output array).
+
+#include <bits/stdc++.h>
+vector < int > sortedArray(vector < int > a, vector < int > b) {
+
+int asize = a.size();
+        int bsize = b.size();
+        int i = 0;
+        int j = 0;
+        vector<int> unionArray;
+        while(i < asize && j < bsize){
+            if(a[i] == b[j]){
+                if(unionArray.size() == 0 || unionArray.back() != a[i]){
+                    unionArray.push_back(a[i]);
+                }
+                i++;
+                j++;
+
+            }
+            else if(a[i] < b[j]){
+                if(unionArray.size() == 0 || unionArray.back() != a[i]){
+                    unionArray.push_back(a[i]);
+                }
+                i++;
+
+            }
+            else{
+                if(unionArray.size() == 0 || unionArray.back() != b[j]){
+                    unionArray.push_back(b[j]);
+                }
+                j++;
+            }
+        }
+        
+        while(i < asize){
+            if(unionArray.size() == 0 || unionArray.back() != a[i]){
+                unionArray.push_back(a[i]);
+            }
+            i++;
+        }
+        while(j < bsize){
+            if(unionArray.size() == 0 || unionArray.back() != b[j]){
+                unionArray.push_back(b[j]);
+            }
+            j++;
+        }
+        return unionArray;
+}
+
+
+If either one or both arrays are unsorted, we will have to use set for optimal solution  (use unordered_set if order doesn't matter)
+Let:
+
+n = a.size()
+m = b.size()
+
+Time Complexity: O(n + m) (average case)
+
+Auxiliary Space: O(n + m) (in the worst case all elements are distinct)
