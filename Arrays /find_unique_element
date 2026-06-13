@@ -1,0 +1,71 @@
+# Brute force
+
+TC = O(n²)
+SC = O(1) (excluding the output vector; ans stores only 2 elements)
+
+two elements appear once, while all other appear twice, return them in ascending order
+
+class Solution {
+	public:
+	vector<int> singleNum(vector<int>& arr) {
+		// Code here.
+		vector<int> ans;
+		
+		for (int i = 0; i<arr.size(); i++) {
+			int value = arr[i];
+			int count = 0;
+			
+			for (int j = 0; j<arr.size(); j++) {
+				if (arr[i] == arr[j]){
+					count++;
+				}
+			}
+			
+			if (count == 1) {
+				ans.push_back(arr[i]);
+			}
+		}
+		sort(ans.begin(), ans.end());
+		return ans;
+	}
+};
+
+
+# Better 
+
+TC = O(n log n)
+SC = O(n)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int findUnique(int *arr, int size)
+{
+    //Write your code here
+    map<int, int> mpp;
+    
+    for(int i=0; i<size; i++){
+        mpp[arr[i]]++;
+    }
+
+    for(auto x : mpp){
+        if(x.second == 1){
+            return x.first;
+        }
+    }
+}
+
+# Optimal 
+
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int xor1 = 0;
+
+        for(int i=0; i<nums.size(); i++){
+            xor1 = xor1 ^ nums[i];
+        }
+        return xor1;
+    }
+};
