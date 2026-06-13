@@ -1,5 +1,28 @@
 # Brute force
 
+TC = O(n²)
+Outer loop: n + 1 times
+Inner loop: up to n times
+
+SC = O(1)
+
+int missingNumber(vector<int>& nums){
+  int n = nums.size();
+
+  for(int i=0; i<=n; i++){
+    bool found = 0;
+    for(int j=0; j<n; j++){
+      if(nums[j] == i){
+        found = 1;
+        break;
+      }
+    }
+    if(found == 0) return i;
+  }
+return -1;
+}
+
+
 # Better 
 
 TC: O(n)
