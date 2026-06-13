@@ -57,6 +57,8 @@ int findUnique(int *arr, int size)
 
 # Optimal 
 
+TC = O(n)
+SC = O(1)
 
 class Solution {
 public:
