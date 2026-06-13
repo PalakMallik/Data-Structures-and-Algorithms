@@ -1,0 +1,22 @@
+# Brute force
+
+# Better 
+
+class Solution {
+  public:
+    int missingNum(vector<int>& arr) {
+        // code here
+        int n = arr.size();
+        vector<int> freq(n+2, 0);
+        
+        for(auto val : arr){
+            freq[val] = 1;
+        }
+        
+        for(int i=1; i<=n+1; i++){
+            if(freq[i] == 0){
+                return i;
+            }
+        }
+    }
+};
