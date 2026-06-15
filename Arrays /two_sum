@@ -1,0 +1,76 @@
+# Brute force
+Nested loop
+
+TC : O(n²)
+SC: O(1)
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<nums.size(); j++){
+                if(nums[i]+nums[j]==target){
+                    return {i, j};
+                }
+            }
+        }
+        return {};
+    }
+};
+
+
+
+# Better approach
+Hashing
+
+TC :  O(n log n) in case of map     (if unordered map is used, then TC :  O(n))
+SC :  O(n)
+
+class Solution {
+  public:
+    vector<int> twoSum(vector<int> &arr, int target) {
+
+        map<int, int> mpp;
+        int n = arr.size();
+        
+        for(int i=0; i<n; i++){
+            int rem = target - arr[i];
+            
+            if(mpp.find(rem) != mpp.end()){
+                return {arr[i], rem};
+            }
+            
+            mpp[arr[i]] = i;
+        }
+        return {};
+    }
+};
+
+
+# Optimal 
+Sorting + 2 pointer 
+
+TC = O(N log N)
+SC = O(1) (ignoring sort's recursion stack)
+SC = O(log N) due to the recursion stack of sort()
+
+class Solution {
+  public:
+    bool twoSum(vector<int>& arr, int target) {
+        // code here
+        sort(arr.begin(), arr.end());
+        int n = arr.size();
+        int left = 0, right = n-1;
+        
+        while(left < right){
+            int sum = arr[left] + arr[right];
+            
+            if(sum == target) return true;
+            else if(sum < target) left++;
+            else right--;
+        }
+        
+        return false;
+    }
+};
