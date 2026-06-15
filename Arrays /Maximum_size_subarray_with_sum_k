@@ -20,7 +20,34 @@ int longestSubarrayWithSumK(vector<int> a, long long k) {
 }
 
 
+
 # Better solution
+(this is optimal solution for array containing only non-negative elements)
+sliding window (two pointers) approach
+
+Time: O(n)
+Space: O(1)
+
+int longestSubarray(vector<int>& nums, int k) {
+    int left = 0, sum = 0, maxLength = 0;
+
+    for (int right = 0; right < nums.size(); right++) {
+        sum += nums[right];
+
+        while (sum > k && left <= right) {
+            sum -= nums[left];
+            left++;
+        }
+
+        if (sum == k) {
+            maxLength = max(maxLength, right - left + 1);
+        }
+    }
+
+    return maxLength;
+}
+
+
 
 # Optimal 
 
