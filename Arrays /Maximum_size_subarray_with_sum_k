@@ -22,8 +22,8 @@ int longestSubarrayWithSumK(vector<int> a, long long k) {
 
 
 # Better solution
-(this is optimal solution for array containing only non-negative elements)
 sliding window (two pointers) approach
+(this is optimal solution for array containing only non-negative elements)
 
 Time: O(n)
 Space: O(1)
