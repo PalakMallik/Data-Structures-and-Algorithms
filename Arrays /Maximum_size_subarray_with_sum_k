@@ -50,14 +50,14 @@ int longestSubarray(vector<int>& nums, int k) {
 
 
 # Optimal 
-
+Prefix Sum + HashMap (best for any array containing +ve, -ve and/or 0s)
 TC: O(n) average
 SC: O(n)
 
 class Solution {
   public:
     int longestSubarray(vector<int>& arr, int k) {
-        // code here
+
         unordered_map<long long, int> mpp;
         int maxLength = 0;
         long long prefixSum = 0;
