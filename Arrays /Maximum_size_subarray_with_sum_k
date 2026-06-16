@@ -31,9 +31,14 @@ int longestSubarrayWithSumK(vector<int> a, long long k) {
 
 # Better solution
 sliding window (two pointers) approach
-(this is optimal solution for array containing only non-negative elements, this is only for sorted arrays)
+(this is optimal solution for array containing only non-negative elements)
 
-Time: O(n)
+Time: O(n)  Even though there is a while loop inside the for loop, the left pointer never moves backward.
+                So total movements:
+                    right → n times
+                    left  → n times
+                    Overall:
+                    O(n + n) = O(n)
 Space: O(1)
 
 int longestSubarray(vector<int>& nums, int k) {
