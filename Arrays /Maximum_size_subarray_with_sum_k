@@ -1,10 +1,18 @@
+# IMPORTANT QUESTION
+
 Brute force
+
+this solution is completely correct even if the array contains:
+positive numbers
+negative numbers
+zeros
+Because you are checking every possible subarray
 
 TC = O(n²)
 SC = O(1)
 
 int longestSubarrayWithSumK(vector<int> a, long long k) {
-    // Write your code here
+
     int maxLength = 0;
     for(int i=0; i<a.size(); i++){
         long long sum = 0;
@@ -23,7 +31,7 @@ int longestSubarrayWithSumK(vector<int> a, long long k) {
 
 # Better solution
 sliding window (two pointers) approach
-(this is optimal solution for array containing only non-negative elements)
+(this is optimal solution for array containing only non-negative elements, this is only for sorted arrays)
 
 Time: O(n)
 Space: O(1)
