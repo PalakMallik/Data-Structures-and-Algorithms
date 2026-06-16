@@ -51,6 +51,9 @@ class Solution {
 # Optimal 
 Sorting + 2 pointer 
 
+If the problem asks: return indices, then sorting destroys original indices unless you store them separately.
+In that case, hashing with unordered_map is usually preferred.
+
 TC = O(N log N)
 SC = O(1) (ignoring sort's recursion stack)
 SC = O(log N) due to the recursion stack of sort()
@@ -58,7 +61,7 @@ SC = O(log N) due to the recursion stack of sort()
 class Solution {
   public:
     bool twoSum(vector<int>& arr, int target) {
-        // code here
+
         sort(arr.begin(), arr.end());
         int n = arr.size();
         int left = 0, right = n-1;
