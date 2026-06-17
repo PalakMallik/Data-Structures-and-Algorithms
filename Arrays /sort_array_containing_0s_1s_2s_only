@@ -1,3 +1,7 @@
+# Brute force
+
+use any sorting algorithm (quick sort , etc)
+
 # Better approach
 
 TC : O(n)
