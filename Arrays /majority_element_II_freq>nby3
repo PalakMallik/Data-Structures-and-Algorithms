@@ -3,6 +3,10 @@ LeetCode
 
 Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
 
+Optimal solution
+TC : O(n)
+SC : O(1)
+
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
