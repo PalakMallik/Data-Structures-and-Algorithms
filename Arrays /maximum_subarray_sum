@@ -29,7 +29,7 @@ SC: O(1)
 long long maxSubarraySum(vector<int> arr, int n)
 {
     // Better approach
-    long long maximumSum = 0;
+    long long maximumSum = LLONG_MIN;
     for(int i=0; i<n; i++){
         long long sum = 0;
         for(int j=i; j<n; j++){
