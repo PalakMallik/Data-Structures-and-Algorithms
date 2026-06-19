@@ -6,7 +6,7 @@ SC: O(1)  → No extra space used
 long long maxSubarraySum(vector<int> arr, int n)
 {
     // Brute force
-    long long maximumSum = 0;
+    long long maximumSum = LLONG_MIN;
     for(int i=0; i<n; i++){
         for(int j=i; j<n; j++){
             long long sum = 0;
