@@ -30,6 +30,9 @@ public:
 
 # Optimal
 
+TC: O(n)
+SC: O(n) (excluding output array: O(1))
+
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
