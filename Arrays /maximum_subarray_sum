@@ -1,7 +1,7 @@
 # Brute force
 
-Time Complexity: O(n³)  → Three nested loops
-Space Complexity: O(1)  → No extra space used
+TC: O(n³)  → Three nested loops
+SC: O(1)  → No extra space used
 
 long long maxSubarraySum(vector<int> arr, int n)
 {
@@ -18,3 +18,47 @@ long long maxSubarraySum(vector<int> arr, int n)
     }
     return maximumSum;
 }
+
+
+
+# Better brute 
+
+TC: O(n²)
+SC: O(1)
+
+long long maxSubarraySum(vector<int> arr, int n)
+{
+    // Better approach
+    long long maximumSum = 0;
+    for(int i=0; i<n; i++){
+        long long sum = 0;
+        for(int j=i; j<n; j++){
+            sum += arr[j];
+            
+            maximumSum = max(maximumSum, sum);
+        }
+    }
+    return maximumSum;
+}
+
+
+
+# Optimal 
+
+TC : O(n)
+SC : O(1)
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if(nums.empty()) return 0;
+        int n = nums.size();
+        int currentSum = nums[0];
+        int maximumSum = nums[0];
+        for(int i=1; i<n; i++){
+            currentSum = max(nums[i], currentSum + nums[i]);
+            maximumSum = max(maximumSum, currentSum);
+        }
+        return maximumSum;
+    }
+};
