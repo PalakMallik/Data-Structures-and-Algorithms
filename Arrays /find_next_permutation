@@ -1,13 +1,13 @@
 # Brute 
 
 TC :
-SC :
+SC : O(1)
 
 
 # Better 
 
 TC : O(n log n)
-SC :
+SC : O(1)
 
 
 # Optimal
