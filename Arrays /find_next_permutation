@@ -6,7 +6,7 @@ SC :
 
 # Better 
 
-TC :
+TC : O(n log n)
 SC :
 
 
