@@ -1,7 +1,33 @@
 # Brute 
 
-TC :
-SC :
+TC : O(n²)
+SC : O(1)
+
+class Solution {
+  public:
+
+    // Function to return length of longest subsequence of consecutive integers.
+    int longestConsecutive(vector<int>& arr) {
+
+        int n = arr.size();
+        if(n == 0) return 0;
+        int longest = 1;
+        
+        for(int i=0; i<n; i++){
+            int x = arr[i];
+            int count = 1;
+            
+            while(find(arr.begin(), arr.end(), x+1) != arr.end()){
+                x = x + 1;
+                count++;
+            }
+             
+            longest = max(longest, count);   
+        }
+        
+        return longest;
+    }
+};
 
 
 # Better 
