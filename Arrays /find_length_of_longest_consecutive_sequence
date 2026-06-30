@@ -32,8 +32,46 @@ class Solution {
 
 # Better 
 
-TC :
-SC :
+1. Sort array
+2. Traverse and count consecutive elements
+3. Ignore duplicates
+
+TC : O(n log n)
+SC : O(1) (ignoring sorting space)
+
+class Solution {
+  public:
+
+    // Function to return length of longest subsequence of consecutive integers.
+    int longestConsecutive(vector<int>& arr) {
+        int n = arr.size();
+        
+        if(n == 1) return 1;
+        
+        sort(arr.begin(), arr.end());
+        
+        int longest = 1;
+        int count = 1;
+
+        for(int i=1; i<n; i++){
+            if(arr[i] == arr[i-1] + 1){
+                count++;
+            }
+            
+            else if(arr[i] == arr[i-1]){
+                continue;
+            }
+            
+            else{
+                count = 1;
+            }
+            
+            longest = max(longest, count);
+        }
+        
+        return longest;
+    }
+};
 
 
 # Optimal
