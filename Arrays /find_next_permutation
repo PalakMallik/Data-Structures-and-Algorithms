@@ -19,7 +19,6 @@ class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
         int pos = -1;
-        int grt = -1;
         int n = nums.size();
 
         for(int i=n-2; i>=0; i--){
@@ -36,12 +35,10 @@ public:
 
         for(int i=n-1; i>pos; i--){
             if(nums[i] > nums[pos]){
-                grt = i;
+                swap(nums[i], nums[pos]);
                 break;
             }
         }
-
-        swap(nums[pos], nums[grt]);
 
         reverse(nums.begin()+pos+1, nums.end());
     }
