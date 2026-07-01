@@ -1,6 +1,6 @@
 # Brute force approach
 
-TC : O(nm(n+m))
+TC : O(nm(n+m))  ≈  n³
 SC : O(1)
 
 #include <bits/stdc++.h>
