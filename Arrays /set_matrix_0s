@@ -85,8 +85,8 @@ void setZeros(vector<vector<int>> &A) {
 
 # Optimal 
 
-TC : 
-SC : 
+TC : O(n × m)
+SC : O(1)
 
 class Solution {
 public:
