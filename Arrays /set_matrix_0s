@@ -10,7 +10,7 @@ void setZeros(vector<vector<int>> &matrix)
 	int n = matrix.size();
 	int m = matrix[0].size();
 
-	auto setRowNeg1 = [&](int x)
+	auto setRowNeg1 = [&](int x)                      // lambda function
 	{
 		for(int j=0; j<m; j++){
 			if(matrix[x][j] != 0){
@@ -19,7 +19,7 @@ void setZeros(vector<vector<int>> &matrix)
 		}
 	};
 
-	auto setColumnNeg1 = [&](int x)
+	auto setColumnNeg1 = [&](int x)                   // lambda function
 	{
 		for(int i=0; i<n; i++){
 			if(matrix[i][x] != 0){
@@ -45,4 +45,38 @@ void setZeros(vector<vector<int>> &matrix)
 		}
 	}
 	
+}
+
+
+
+# Better approach
+
+TC : O(n × m)
+SC : O(n + m)
+
+#include <bits/stdc++.h>
+
+void setZeros(vector<vector<int>> &A) {
+	int n11 = A.size();
+	int n12 = A[0].size();
+
+    vector <int> rows(n11, 0);
+    vector <int> cols(n12, 0);
+    
+    for(int i=0; i<n11; i++){
+        for(int j=0; j<n12; j++){
+            if(A[i][j] == 0){
+                rows[i] = 1;
+                cols[j] = 1;
+            }
+        }
+    }
+    
+    for(int i=0; i<n11; i++){
+        for(int j=0; j<n12; j++){
+            if(rows[i] || cols[j]){
+                A[i][j] = 0;
+            }
+        }
+    }
 }
