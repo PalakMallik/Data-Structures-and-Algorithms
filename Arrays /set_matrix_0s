@@ -1,4 +1,48 @@
 # Brute force approach
 
-TC :
-SC :
+TC : O(nm(n+m))
+SC : O(1)
+
+#include <bits/stdc++.h>
+
+void setZeros(vector<vector<int>> &matrix)
+{
+	int n = matrix.size();
+	int m = matrix[0].size();
+
+	auto setRowNeg1 = [&](int x)
+	{
+		for(int j=0; j<m; j++){
+			if(matrix[x][j] != 0){
+				matrix[x][j] = -1;
+			}
+		}
+	};
+
+	auto setColumnNeg1 = [&](int x)
+	{
+		for(int i=0; i<n; i++){
+			if(matrix[i][x] != 0){
+				matrix[i][x] = -1;
+			}
+		}
+	};
+
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			if(matrix[i][j] == 0){
+				setRowNeg1(i);
+				setColumnNeg1(j);
+			}
+		}
+	}
+
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			if(matrix[i][j] == -1){
+				matrix[i][j] = 0;
+			}
+		}
+	}
+	
+}
