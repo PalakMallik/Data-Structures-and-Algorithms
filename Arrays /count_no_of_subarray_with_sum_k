@@ -1,3 +1,29 @@
+# Brute 
+
+TC : O(n³)
+SC : O(1)
+
+class Solution {
+  public:
+    int cntSubarrays(vector<int> &arr, int k) {
+        int n = arr.size();
+        int count = 0;
+        for(int i=0; i<n; i++){
+            for(int j=i; j<n; j++){
+                int sum = 0;
+                for(int idx=i; idx<=j; idx++){
+                    sum += arr[idx];
+                }
+                if(sum == k){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+};
+
+
 # Optimal
 
 TC : O(n)
