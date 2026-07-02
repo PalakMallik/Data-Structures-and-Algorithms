@@ -1,6 +1,6 @@
 # Optimal       (in-place modification,  no extra space)
 
--- Rotate matrix by 90° clockwise
+-- Rotate matrix by 90° clockwise            (transpose and reverse each row)
 TC : O(n²)
 SC : O(1)
 
@@ -21,7 +21,7 @@ public:
     }
 };
 
--- Rotate matrix by 90° anti-clockwise
+-- Rotate matrix by 90° anti-clockwise        (transpose and reverse each column)
 TC : O(n²)
 SC : O(1)
 
