@@ -1,0 +1,27 @@
+# Optimal
+
+TC : O(n)
+SC : O(n)
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> freqMap;
+        freqMap.reserve(nums.size()*2);
+        freqMap[0] = 1;
+        int count = 0;
+        int prefixSum = 0;
+        
+        for(int num : nums){
+            prefixSum += num;
+            
+            int rem = prefixSum - k;
+                        
+            if(freqMap.count(rem)){
+                count += freqMap[rem];
+            }
+            freqMap[prefixSum]++;
+        }
+        return count;
+    }
+};
