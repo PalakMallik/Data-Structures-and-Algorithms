@@ -30,6 +30,75 @@ int main()
 
 
 
+
+
+-- find nth row of Pascal's triangle
+
+# Brute
+
+TC : O(n²)
+SC : O(n)
+Auxiliary computation space is constant.
+
+class Solution {
+  public:
+    int getElement(int row, int column){
+            long long val = 1;
+            
+            int n = row - 1;
+            int r = column - 1;
+            
+            r = min(r, n-r);
+            
+            for(int i=0; i<r; i++){
+                val = val * (n - i);
+                val = val / (i + 1);
+            }
+            
+            return val;
+        }
+        
+    vector<int> nthRowOfPascalTriangle(int n) {
+        vector<int> ansRow;
+        
+        for(int col=1; col<=n; col++){
+            ansRow.push_back(getElement(n, col));
+        }
+        
+        return ansRow;
+    }
+};
+
+
+# Optimal
+
+TC : O(rowIndex)
+SC : O(rowIndex)
+Auxiliary Space = O(1)
+
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        long long ans = 1;
+        vector<int> ansRow(rowIndex + 1);
+        ansRow[0] = 1;
+
+        for(int col=1; col<=rowIndex; col++){
+            ans = ans * (rowIndex - col + 1);
+            ans = ans / (col);
+            
+            ansRow[col] = ans;
+        }
+
+        return ansRow;
+    }
+};
+
+
+
+
+
+
 -- find first n rows of Pascal's triangle
 
 # Brute 
