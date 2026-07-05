@@ -31,6 +31,47 @@ int main()
 
 
 -- find first n rows of Pascal's triangle
+
+# Brute 
+
+TC :
+SC :
+
+int getElement(int row, int column){
+    int ans = 1;
+
+    int n = row - 1;
+    int r = column - 1;
+
+    r = min(r, n-r);
+
+    for(int i=0; i<r; i++){
+        ans = ans * (n - i);
+        ans = ans / (i + 1);
+    }
+
+    return ans;
+}
+
+vector<vector<int>> pascalTriangle(int N) {
+
+    vector<vector<int>> pascalTriangle;
+
+    for(int row=1; row<=N; row++){
+
+        vector<int> ansRow;
+
+        for(int col=1; col<=row; col++){
+            ansRow.push_back(getElement(row, col));
+        }
+
+        pascalTriangle.push_back(ansRow);
+    }
+
+    return pascalTriangle;
+}
+
+
 # Optimal
 
 TC : O(numRows²)
