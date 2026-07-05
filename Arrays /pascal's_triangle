@@ -34,8 +34,9 @@ int main()
 
 # Brute 
 
-TC :
-SC :
+TC : O(N³)
+SC : O(N²)
+Auxiliary Space (extra space excluding output) : O(N)
 
 int getElement(int row, int column){
     int ans = 1;
