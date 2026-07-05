@@ -31,6 +31,11 @@ int main()
 
 
 -- find first n rows of Pascal's triangle
+# Optimal
+
+TC : O(numRows²)
+SC : O(numRows²)
+Auxiliary Space: O(numRows)
 
 class Solution {
 public:
