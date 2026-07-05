@@ -27,3 +27,33 @@ int main()
     cout << element(5, 3) << endl;
     return 0;
 }
+
+
+
+-- find first n rows of Pascal's triangle
+
+class Solution {
+public:
+    vector<int> getRow(int row){
+        int ans = 1;
+        vector<int> ansRow;
+        ansRow.push_back(ans);
+
+        for(int col=1; col<row; col++){
+            ans = ans * (row - col);
+            ans = ans / (col);
+            ansRow.push_back(ans);
+        }
+
+        return ansRow;
+    }
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> pascalTriangle;
+
+        for(int row=1; row<=numRows; row++){
+            pascalTriangle.push_back(getRow(row));
+        } 
+
+        return pascalTriangle;
+    }
+};
