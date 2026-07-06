@@ -88,12 +88,12 @@ int findMajorityElement(int arr[], int n) {
 			count++;
 		}
 
-		else if(arr[i] != element){
-			count--;
+		else if(arr[i] == element){
+			count++;
 		}
 
 		else{
-			count++;
+			count--;
 		}
 	}
 
