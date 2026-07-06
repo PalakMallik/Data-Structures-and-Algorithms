@@ -46,6 +46,23 @@ class Solution {
     }
 };
 
+
+TC : O(n)
+SC : O(n)
+#include <bits/stdc++.h>
+int majorityElement(vector<int> v) {
+	unordered_map<int, int> frequency;
+    int n = v.size();
+
+    for(int num : v){
+        frequency[num]++;
+
+        if(frequency[num] > n/2){
+            return num;
+        }
+    }
+}
+
 # Optimal approach
 Boyer–Moore majority vote algorithm
 
