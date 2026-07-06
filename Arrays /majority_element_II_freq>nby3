@@ -79,6 +79,8 @@ public:
         vector<int> ans;
         int elem1, elem2;
         int count1 = 0, count2 = 0;
+
+        // find potential candidates
         for(int x : nums){
             if(count1 == 0 && x != elem2){
                 elem1 = x;
@@ -100,6 +102,7 @@ public:
             }
         }
 
+        verification
         count1 = count2 = 0;
         for(int x : nums){
             if(x == elem1) count1++;
