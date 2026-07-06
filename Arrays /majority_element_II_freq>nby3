@@ -15,7 +15,7 @@ public:
 
         for(int i=0; i<n; i++){
 
-            if(ans.size() == 0 || find(ans.begin(), ans.end(), nums[i]) == ans.end()){
+            if(find(ans.begin(), ans.end(), nums[i]) == ans.end()){
                 int count = 0;
 
                 for(int j=0; j<n; j++){
@@ -26,7 +26,11 @@ public:
 
                 if(count > n/3){
                     ans.push_back(nums[i]);
+                    if(ans.size() == 2){
+                        return ans;
+                    }
                 }
+
             }
         }
 
