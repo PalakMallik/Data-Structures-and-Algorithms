@@ -75,26 +75,41 @@ Boyer–Moore majority vote algorithm
 TC : O(n)
 SC : O(1)
 
-class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-        int n = nums.size();
-        int count = 0;
-        int element;
-        for(int i=0; i<n; i++){
-            if(count == 0){
-                element = nums[i];
-                count++;
-            }
-            else if(nums[i] == element){
-                count++;
-            }
-            else{
-                count--;
-            }
-        }
-        return element;
-    }
-};
+#include <bits/stdc++.h>
+
+int findMajorityElement(int arr[], int n) {
+	int count = 0;
+	int element;
+
+	for(int i=0; i<n; i++){
+
+		if(count == 0){
+			element = arr[i];
+			count++;
+		}
+
+		else if(arr[i] != element){
+			count--;
+		}
+
+		else{
+			count++;
+		}
+	}
+
+	count = 0;
+	for(int i=0; i<n; i++){
+		if(arr[i] == element){
+			count++;
+		}
+	}
+
+	if(count > n/2){
+		return element;
+	}
+	
+	return -1;
+	
+}
 
 If the problem does not guarantee that a mojority element exists, then run a second loop to confirm if the candidate element is actually present in majority or not.
