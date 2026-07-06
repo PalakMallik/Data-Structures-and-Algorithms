@@ -20,6 +20,8 @@ int majorityElement(vector<int> v) {
 }
 
 
+
+
 # Better approach
 Frequency Counting / Hashing Approach
 
@@ -62,6 +64,10 @@ int majorityElement(vector<int> v) {
         }
     }
 }
+
+
+
+
 
 # Optimal approach
 Boyer–Moore majority vote algorithm
