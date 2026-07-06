@@ -40,6 +40,34 @@ public:
 
 
 
+# Better
+TC : O(n)
+SC : O(n)
+#include <bits/stdc++.h>
+
+vector<int> majorityElementII(vector<int> &arr)
+{
+    unordered_map<int, int> frequency;
+    vector<int> ans;
+    int n = arr.size();
+
+    for(int num : arr){
+        frequency[num]++;
+
+        if(frequency[num] == n/3 + 1){
+            ans.push_back(num);
+        }
+
+        if(ans.size() == 2){
+            return ans;
+        }
+    }
+
+    return ans;
+
+}
+
+
 Optimal solution
 TC : O(n)
 SC : O(1)
