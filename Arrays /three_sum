@@ -1,6 +1,12 @@
 # Brute
-TC : 
-SC :
+
+TC : O(N³ + V log M) (worst case O(N³ log N), commonly simplified to O(N³) in interviews and DSA discussions) 
+V = number of valid triplets found
+M = number of unique triplets stored
+
+SC : O(M)
+Auxiliary space (excluding the output) is also O(M) because of the set
+
 #include <bits/stdc++.h> 
 vector<vector<int>> findTriplets(vector<int>arr, int n, int K) {
 	
