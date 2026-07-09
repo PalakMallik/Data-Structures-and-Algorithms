@@ -1,0 +1,122 @@
+# Brute  (try every possible quadruplet using four nested loops)
+TC : O(N⁴ log M) (commonly written as O(N⁴))
+SC : O(M)
+where M = number of unique quadruplets
+
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        set<vector<int>> st;
+
+        for(int i=0; i<n-3; i++){
+            for(int j=i+1; j<n-2; j++){
+                for(int k=j+1; k<n-1; k++){
+                    for(int l=k+1; l<n; l++){
+
+                        long long sum = 1LL * nums[i] + nums[j] + nums[k] + nums[l];
+                        
+                        if(sum == target){
+
+                            vector<int> temp = {nums[i], nums[j], nums[k], nums[l]};
+                            sort(temp.begin(), temp.end());
+
+                            st.insert(temp);
+                        }
+                    }
+                }
+            }
+        }
+
+        vector<vector<int>> ans(st.begin(), st.end());
+        return ans;
+    }
+};
+
+# Better  (Hashing)
+TC : O(N³ · log M) (commonly written as O(N³))
+SC : Total Space (including output) O(N + M)
+     Auxiliary Space : O(N)
+     
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        set<vector<int>> st;
+
+        for(int i=0; i<n-3; i++){
+            for(int j=i+1; j<n-2; j++){
+                unordered_set<long long> middleElements;
+                for(int k=j+1; k<n; k++){
+                    long long fourth = 1LL * target - nums[i] - nums[j] - nums[k];
+
+                    if(middleElements.find(fourth) != middleElements.end()){
+                        vector<int> temp = {nums[i], nums[j], nums[k], (int)fourth};
+                        sort(temp.begin(), temp.end());
+
+                        st.insert(temp);
+                    }
+                    middleElements.insert(nums[k]);
+                }
+            }
+        }
+
+        vector<vector<int>> ans(st.begin(), st.end());
+        return ans;
+    }
+};
+
+
+
+
+# Optimal  (Sorting + Two Pointers)
+TC : O(N³)
+SC : O(M)   (including the output), where M is the number of quadruplets returned
+     Auxiliary Space: O(1)
+     
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        vector<vector<int>> ans;
+
+        for(int i=0; i<n-3; i++){
+            if(i>0 && nums[i] == nums[i-1]) continue;
+
+            for(int j=i+1; j<n-2; j++){
+                if(j>i+1 && nums[j] == nums[j-1]) continue;
+
+                int left = j + 1;
+                int right = n - 1;
+                while(left < right){
+                    long long sum = 1LL * nums[i] + nums[j] + nums[left] + nums[right];
+
+                    if(sum < target){
+                        left++;
+                    }
+
+                    else if(sum > target){
+                        right--;
+                    }
+
+                    else{
+                        ans.push_back({nums[i], nums[j], nums[left], nums[right]});
+
+                        left++;
+                        right--;
+                        while(left < right && nums[left] == nums[left-1]){
+                            left++;
+                        }
+                        while(left < right && nums[right] == nums[right+1]){
+                            right--;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+};
