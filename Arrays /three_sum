@@ -1,6 +1,9 @@
 # Brute
 
 TC : O(N³ + V log M) (worst case O(N³ log N), commonly simplified to O(N³) in interviews and DSA discussions) 
+Three nested loops: O(N³)
+Sorting each valid triplet: O(1) (sorting only 3 elements)
+Inserting into set: O(log M)
 V = number of valid triplets found
 M = number of unique triplets stored
 
@@ -113,3 +116,62 @@ public:
         return ans;
     }
 };
+
+
+
+
+-- You are given an array ‘ARR’ containing ‘N’ integers, and you are also given an integer ‘TARGET’.
+You task is to find the count of triplets i, j, k ( 0 ≤ i < j < k < N ), such that 'ARR[i]' + 'ARR[j]' + 'ARR[k]' is less than the value of ‘TARGET’.
+
+# Brute
+TC : O(n³)  (three nested loops)
+SC : O(1)
+#include <bits/stdc++.h>
+using namespace std;
+
+int threeSumSmaller(int n, vector<int> arr, int target) {
+
+    int count = 0;
+
+    for(int i = 0; i < n - 2; i++) {
+        for(int j = i + 1; j < n - 1; j++) {
+            for(int k = j + 1; k < n; k++) {
+
+                if(arr[i] + arr[j] + arr[k] < target)
+                    count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+
+# Optimal
+TC : O(n²)
+SC : O(1)
+#include <bits/stdc++.h> 
+int threeSumSmaller(int n, vector<int> arr, int target) {
+    sort(arr.begin(), arr.end());
+
+    int count = 0;
+    
+    for(int i=0; i<n; i++){
+
+        int j = i + 1;
+        int k = n - 1;
+        while(j < k){
+            int sum = arr[i] + arr[j] + arr[k];
+            if(sum < target){
+                count += (k - j);
+
+                j++;
+            }
+            else{
+                k--;
+            }
+        }
+    }
+
+    return count;
+}
