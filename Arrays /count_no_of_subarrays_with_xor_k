@@ -1,0 +1,89 @@
+# Brute 
+TC : O(n³)
+SC : O(1)
+class Solution {
+	public:
+	long subarrayXor(vector<int> &arr, int k) {
+		int n = arr.size();
+		long count = 0;
+		
+		for (int i = 0; i<n; i++) {
+			for (int j = i; j<n; j++) {
+				
+				int xr = 0;
+				
+				for (int idx = i; idx <= j; idx++) {
+					xr = xr ^ arr[idx];
+				}
+				
+				if (xr == k) {
+					count++;
+				}
+			}
+		}
+		
+		return count;
+	}
+};
+
+
+
+
+# Better
+TC : O(n²)
+SC : O(1)
+class Solution {
+  public:
+    long subarrayXor(vector<int> &arr, int k) {
+        int n = arr.size();
+        long count = 0;
+        
+        for(int i=0; i<n; i++){
+            int xr = 0;
+            
+            for(int j=i; j<n; j++){
+                xr = xr ^ arr[j];
+                
+                if(xr == k){
+                    count++;gc
+                }
+            }
+        }
+        
+        return count;
+        
+    }
+};
+
+
+
+
+
+# Optimal
+TC : O(n)
+SC : O(n)
+class Solution {
+  public:
+    long subarrayXor(vector<int> &arr, int k) {
+        int n = arr.size();
+        long count = 0;
+        int prefixXOR = 0;
+        
+        unordered_map<int, int> hashMap;
+        hashMap[0] = 1;
+        
+        for(int i=0; i<n; i++){
+            prefixXOR ^= arr[i];
+            
+            int x = prefixXOR ^ k;
+            
+            if(hashMap.find(x) != hashMap.end()){
+                count += hashMap[x];
+            }
+            
+            hashMap[prefixXOR]++;
+        }
+        
+        return count;
+    }
+};
