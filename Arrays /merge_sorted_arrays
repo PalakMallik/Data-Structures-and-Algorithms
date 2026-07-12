@@ -1,0 +1,41 @@
+# Brute 
+TC : O(m + n)
+SC : O(m + n)  
+     (Auxiliary Space = O(m + n))
+     
+class Solution {
+  public:
+    void mergeArrays(vector<int>& a, vector<int>& b) {
+        int m = a.size();
+        int n = b.size();
+        
+        vector<int> ans;
+        int i = 0, j = 0;
+        
+        while(i < m && j < n){
+            if(a[i] <= b[j]){
+                ans.push_back(a[i]);
+                i++;
+            }
+            else{
+                ans.push_back(b[j]);
+                j++;
+            }
+        }
+        
+        while(i < m){
+            ans.push_back(a[i]);
+            i++;
+        }
+        
+        while(j < n){
+            ans.push_back(b[j]);
+            j++;
+        }
+        
+        for(int k=0; k<m+n; k++){
+            if(k < m) a[k] = ans[k];
+            else b[k - m] = ans[k];
+        }
+    }
+};
