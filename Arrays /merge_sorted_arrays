@@ -77,6 +77,51 @@ class Solution {
 
 
 
-# Optimal   (Gap method (shell sort))
-TC :
-SC :
+# Optimal   (Gap method (shell sort))    (without extra space)
+TC : O((m+n) × log(m+n))
+SC : O(1)
+
+#include<vector>
+
+void swapIfGreater(vector<long long> &a, vector<long long> &b,int left,int right){
+	if(a[left] > b[right]){
+		swap(a[left], b[right]);
+	}
+}
+void mergeTwoSortedArraysWithoutExtraSpace(vector<long long> &a, vector<long long> &b){
+	int m = a.size();
+	int n = b.size();
+
+	int gap = ((m + n) / 2) + ((m + n) % 2);
+	
+
+	while(gap > 0){
+
+		int left = 0;
+		int right = left + gap;
+		
+		while(right < m + n){
+
+			// a and a
+			if(right < m){
+				swapIfGreater(a, a, left, right);
+			}
+
+			// a and b
+			else if(left < m && right >= m){
+				swapIfGreater(a, b, left, right-m);
+			}
+
+			// b and b
+			else{
+				swapIfGreater(b, b, left-m, right-m);
+			}
+			left++;
+			right++;
+		}
+		
+		if(gap == 1) break;
+		gap = (gap / 2) + (gap % 2);
+	}
+	
+}
