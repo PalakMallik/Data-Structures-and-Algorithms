@@ -39,3 +39,37 @@ class Solution {
         }
     }
 };
+
+
+# Optimal (without extra space)
+TC : O(min(m, n)) + O(m log m) + O(n log n)
+     Since the sorting terms dominate:
+     Overall TC = O(m log m + n log n)
+
+SC : Auxiliary Space = O(log m + log n)
+     (If your interviewer ignores the recursion stack of sort(), they may simply say O(1) auxiliary space.)
+
+class Solution {
+  public:
+    void mergeArrays(vector<int>& a, vector<int>& b) {
+        int m = a.size();
+        int n = b.size();
+        int left = m - 1;
+        int right = 0;
+        
+        while(left >= 0 && right < n){
+            if(a[left] > b[right]){
+                swap(a[left], b[right]);
+                left--;
+                right++;
+            }
+            else{
+                break;
+            }
+        }
+        
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
+        
+    }
+};
