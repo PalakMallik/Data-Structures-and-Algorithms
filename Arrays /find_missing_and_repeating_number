@@ -1,0 +1,96 @@
+# Brute
+TC : O(n²) (nested loops)
+SC : O(1) (only a few variables are used)
+
+vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
+{
+    int n = nums.size();
+    int repeatingNumber = -1;
+    int missingNumber = -1;
+
+    for(int i=1; i<=n; i++){
+        
+        int count = 0;
+        for(int j=0; j<n; j++){
+            if(nums[j] == i){
+                count++;
+            }
+        }
+
+        if(count == 2) repeatingNumber = i;
+        else if(count == 0) missingNumber = i;
+
+        if(repeatingNumber != -1 && missingNumber != -1){
+            break;
+        }
+    }
+
+    return {repeatingNumber, missingNumber};
+}
+
+
+
+# Better
+TC : O(n)
+SC : O(n)
+vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
+{
+    int n = nums.size();
+    int missingElement = -1;
+    int repeatingElement = -1;
+    vector<int> frequency(n+1, 0);
+
+    for(int element : nums){
+        frequency[element]++;
+    }
+
+    for(int i=1; i <= n; i++){
+        
+        if(frequency[i] == 0){
+            missingElement = i;
+        }
+        else if(frequency[i] == 2){
+            repeatingElement = i;
+        }
+    }
+
+    return {repeatingElement, missingElement};
+}
+
+
+
+# Optimal
+TC : O(n)
+SC : O(1)
+
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	// sum of first n natural numbers
+	long long naturalSum = 1LL * n * (n+1) / 2;
+	// sum of squares of first n natural numbers
+	long long naturalSquareSum = 1LL * n * (n+1) * (2*n+1) / 6;
+
+	// sum of all elements of given array
+	long long arraySum = 0;
+	// sum of squares of all elements of given array
+	long long arraySquareSum = 0;
+
+	for(int element : arr){
+		arraySum += element;
+		arraySquareSum += 1LL * element * element;
+	}
+
+	// equation1 = m - r
+	long long equation1 = naturalSum - arraySum;
+	// equation2 = (m^2 - r^2)  =  (m + r) * (m - r)
+	long long equation2 = naturalSquareSum - arraySquareSum;
+	// equation2 now stores (m + r)
+	equation2 = equation2 / equation1;
+
+	long long missingElement = (equation1 + equation2) / 2;
+	long long repeatingElement = (equation2 - equation1) / 2;
+
+	return {(int)missingElement, (int)repeatingElement};
+}
