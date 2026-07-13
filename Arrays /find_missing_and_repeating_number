@@ -1,4 +1,4 @@
-# Brute
+# Brute   (Nested loop)
 TC : O(n²) (nested loops)
 SC : O(1) (only a few variables are used)
 
@@ -30,7 +30,7 @@ vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
 
 
 
-# Better
+# Better  (Hash array (vector))
 TC : O(n)
 SC : O(n)
 vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
@@ -59,8 +59,8 @@ vector<int> findRepeatingAndMissingNumbers(vector<int> nums)
 
 
 
-# Optimal
-TC : O(n)
+# Optimal  (Mathematics)   (remember the formulas)
+TC : O(n) 
 SC : O(1)
 
 #include <bits/stdc++.h>
@@ -94,3 +94,7 @@ pair<int,int> missingAndRepeating(vector<int> &arr, int n)
 
 	return {(int)missingElement, (int)repeatingElement};
 }
+
+
+There is also a XOR method (optimal). 
+There are a few other methods also to solve this question.
