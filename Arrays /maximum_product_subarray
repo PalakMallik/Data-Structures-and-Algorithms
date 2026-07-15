@@ -1,0 +1,70 @@
+# Brute  (find product of all possible subarrays using 3 nested loops)
+TC : O(n³)
+SC : O(1)
+#include <bits/stdc++.h> 
+int maximumProduct(vector<int> &arr, int n)
+{
+	int maximumProduct = INT_MIN;
+	for(int i=0; i<n; i++){
+		for(int j=i; j<n; j++){
+
+			int product = 1;
+			for(int k=i; k<=j; k++){
+				product *= arr[k];
+			}
+
+			maximumProduct = max(maximumProduct, product);
+		}
+	}
+
+	return maximumProduct;
+}
+
+
+
+# Better   (find product of all possible subarrays using 2 nested subarrays)
+TC : O(n²)
+SC : O(1)
+#include <bits/stdc++.h> 
+int maximumProduct(vector<int> &arr, int n)
+{
+	int maximumProduct = INT_MIN;
+
+	for(int i=0; i<n; i++){
+		int product = 1;
+		for(int j=i; j<n; j++){
+			product *= arr[j];
+			maximumProduct = max(maximumProduct, product);
+		}
+	}
+
+	return maximumProduct;
+}
+
+
+# Optimal - 1   (Bidirectional Traversal using Prefix and Suffix Products)
+TC : O(n)
+SC : O(1)
+#include <bits/stdc++.h> 
+int maximumProduct(vector<int> &arr, int n)
+{
+	int maximumProduct = INT_MIN;
+
+	int prefix = 1, suffix = 1;
+	for(int i=0; i<n; i++){
+		if(prefix == 0) prefix = 1;
+		if(suffix == 0) suffix = 1;
+
+		prefix *= arr[i];
+		suffix *= arr[n-i-1];
+
+		maximumProduct = max(maximumProduct, max(prefix, suffix));
+	}
+
+	return maximumProduct;
+}
+
+
+# Optimal - 2    (Kadane's algorithm)
+TC : O(n)
+SC : O(1)
