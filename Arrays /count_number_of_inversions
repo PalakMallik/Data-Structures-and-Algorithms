@@ -86,7 +86,10 @@ class Solution {
 };
 
 
+
+
 -- LeetCode - 315
+
 # Brute 
 TC : O(n²)
 SC : Total Space (including output): O(n)
@@ -114,3 +117,92 @@ public:
         return ans;
     }
 };
+
+
+
+
+# Optimal 
+TC : O(n log n)
+
+     ( Building valueIndexArray : O(n)
+       Merge Sort : O(n log n)
+       Total : O(n log n) )
+
+
+SC : Auxiliary Space: O(n) 
+     Output Space: O(n)
+
+     ( answer            O(n)    // output space
+       valueIndexArray : O(n)
+       temp : O(n)
+       recursion : O(log n) )
+
+class Solution {
+public:
+    void merge(vector<pair<int, int>>& arr, int low, int mid, int high, vector<int>& ans){
+        vector<pair<int, int>> temp;
+        temp.reserve(high - low + 1);
+        int left = low;
+        int right = mid + 1;
+
+        int rightCount = 0;
+
+        while(left <= mid && right <= high){
+            if(arr[left].first <= arr[right].first){
+                int originalIndex = arr[left].second;
+                ans[originalIndex] += rightCount;
+                temp.push_back(arr[left]);
+                left++;
+            }
+            else{
+                rightCount++;
+                temp.push_back(arr[right]);
+                right++;
+            }
+        }
+
+        while(left <= mid){
+            int originalIndex = arr[left].second;
+            ans[originalIndex] += rightCount;
+            temp.push_back(arr[left]);
+            left++;
+        }
+
+        while(right <= high){
+            temp.push_back(arr[right]);
+            right++;
+        }
+
+        for(int i=low; i<=high; i++){
+            arr[i] = temp[i-low];
+        }
+    }
+
+    void mergeSort(vector<pair<int, int>>& arr, int low, int high, vector<int>& ans){
+        if(low >= high) return;
+        int mid = low + (high - low) / 2;
+
+        mergeSort(arr, low, mid, ans);
+        mergeSort(arr, mid+1, high, ans);
+        merge(arr, low, mid, high, ans);
+
+    }
+
+    vector<int> countSmaller(vector<int>& nums) {
+        int n = nums.size();
+
+        vector<pair<int, int>> valueIndexArray(n);
+
+        for(int i=0; i<n; i++){
+            valueIndexArray[i] = {nums[i], i};
+        }
+
+        vector<int> answer(n);
+
+        mergeSort(valueIndexArray, 0, n-1, answer);
+
+        return answer;
+    }
+};
+
+This question can be solved using several methods.
